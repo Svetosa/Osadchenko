@@ -1,0 +1,13 @@
+          PIPE : 
+
+Pipe name : No information found
+Pipe length: No information found
+Pipe diameter: No information found
+Is repair required ?   no
+
+        COMPRESSOR STATION : 
+
+Name CS : jhfj
+Number of workshops : 6
+Number of operating workshops : 6
+Effectiveness : 2
