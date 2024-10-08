@@ -38,7 +38,6 @@ string check_name() {
 void add_truba(truba& t)
 {
 	system("cls");
-	//https://metanit.com/cpp/tutorial/5.8.php
 	cout << "            PIPE : " << endl << endl;
 	cout << "Enter the name of the pipe: ";
 	t.kilometr_mark = check_name();
@@ -94,108 +93,115 @@ void all_objects(truba& t, compr_station& cs)
 {
 	system("cls");
 	cout << "          PIPE : " << endl;
-	cout << endl << "Pipe name : ";
 	if (t.kilometr_mark == "") {
-		cout << "No information found" << endl;
+		cout << endl << "          Pipe not add" << endl;
 	}
 	else {
-		cout << t.kilometr_mark << endl;
-	}
+		cout << endl << "Pipe name : ";
+		if (t.kilometr_mark == "") {
+			cout << "No information found" << endl;
+		}
+		else {
+			cout << t.kilometr_mark << endl;
+		}
 
 
-	cout << "Pipe length: ";
-	if (t.length == 0) {
-		cout << "No information found" << endl;
-	}
-	else {
-		cout << t.length << endl;
-	}
+		cout << "Pipe length: ";
+		if (t.length == 0) {
+			cout << "No information found" << endl;
+		}
+		else {
+			cout << t.length << endl;
+		}
 
 
-	cout << "Pipe diameter: ";
-	if (t.diameter == 0) {
-		cout << "No information found" << endl;
-	}
-	else {
-		cout << t.diameter << endl;
-	}
+		cout << "Pipe diameter: ";
+		if (t.diameter == 0) {
+			cout << "No information found" << endl;
+		}
+		else {
+			cout << t.diameter << endl;
+		}
 
-	cout << "Is repair required ?  ";
+		cout << "Is repair required ?  ";
 
-	if (t.Remote) {
-		cout << " yes";
-	}
-	else {
-		cout << " no";
-	}
+		if (t.Remote) {
+			cout << " no";
+		}
+		else {
+			cout << " yes";
+		}
 
+	}
 	cout << endl << endl << "         COMPRESSOR STATION : " << endl;
 
-	cout << endl << "Name CS : ";
 	if (cs.cs_name == "") {
-		cout << "No information found" << endl;
+		cout << endl << "          CS not add" << endl;
 	}
 	else {
-		cout << cs.cs_name << endl;
-	}
 
-	cout << "Number of workshops : ";
-	if (cs.workshop == 0) {
-		cout << "There are no workshops" << endl;
-	}
-	else {
-		cout << cs.workshop << endl;
-	}
+		cout << endl << "Name CS : ";
+		if (cs.cs_name == "") {
+			cout << "No information found" << endl;
+		}
+		else {
+			cout << cs.cs_name << endl;
+		}
 
-	cout << "Number of operating workshops : ";
-	if (cs.operation_workshop == 0) {
-		cout << "There are no working workshops" << endl;
-	}
-	else {
-		cout << cs.operation_workshop << endl;
-	}
+		cout << "Number of workshops : ";
+		if (cs.workshop == 0) {
+			cout << "There are no workshops" << endl;
+		}
+		else {
+			cout << cs.workshop << endl;
+		}
 
-	cout << "Effectiveness : ";
-	if (cs.effectiveness == 0) {
-		cout << "No information found" << endl;
-	}
-	else {
-		cout << cs.effectiveness << endl;
+		cout << "Number of operating workshops : ";
+		if (cs.operation_workshop == 0) {
+			cout << "There are no working workshops" << endl;
+		}
+		else {
+			cout << cs.operation_workshop << endl;
+		}
+
+		cout << "Effectiveness : ";
+		if (cs.effectiveness == 0) {
+			cout << "No information found" << endl;
+		}
+		else {
+			cout << cs.effectiveness << endl;
+		}
 	}
 	cin.ignore();
 }
 
+
+
 void edit_pipe(truba& t)
 {
 	system("cls");
-	cout << "            EDIT PIPE" << endl;
-	cout << endl << "Is the pipe under repair (y or n)?  ";
-	//char B;
-	//cin >> B;
-	//cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	//if (B == 'y'){
-	//    t.Remote = true;
-	//}
-	//else {
-	//    t.Remote = false;
-	//}
-
-
-	char B;
-	while (true) {
-		cin >> B;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		if (B == 'y' || B == 'n') {
-			if (B == 'y') {
-				t.Remote = true;
+	if (t.kilometr_mark == "") {
+		cout << "          PIPE not add" << endl;
+	}
+	else {
+		cout << "            EDIT PIPE" << endl;
+		cout << endl << "Is the pipe under repair (y or n)?  ";
+		char B;
+		while (true) {
+			cin >> B;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			if (B == 'y' || B == 'n') {
+				if (B == 'y') {
+					t.Remote = true;
+				}
+				else {
+					t.Remote = false;
+				}
+				break;
 			}
 			else {
-				t.Remote = false;
+				cout << "You didn't enter y or n. Try again :  ";
 			}
-			break;
-		}
-		else {
-			cout << "You didn't enter y or n. Try again :  ";
 		}
 	}
 }
@@ -203,9 +209,14 @@ void edit_pipe(truba& t)
 void edit_cs(compr_station& cs)
 {
 	system("cls");
-	cout << "            EDIT CS" << endl;
-	cout << endl << "Number of workshops : ";
-	cs.operation_workshop = proverka();
+	if (cs.cs_name == "") {
+		cout << "          CS not add" << endl;
+	}
+	else {
+		cout << "            EDIT CS" << endl;
+		cout << endl << "Number of workshops : ";
+		cs.operation_workshop = proverka();
+	}
 }
 
 void save(truba& t, compr_station& cs)
@@ -213,79 +224,89 @@ void save(truba& t, compr_station& cs)
 	system("cls");
 	ofstream file("lab1.txt");
 	if (file.is_open()) {
-		file << "          PIPE : " << endl;
-		file << endl << "Pipe name : ";
-		if (t.kilometr_mark == "") {
-			file << "No information found" << endl;
-		}
-		else {
-			file << t.kilometr_mark << endl;
-		}
+		{
+			file << "          PIPE : " << endl;
+			if (t.kilometr_mark == "") {
+				file << "PIPE not add" << endl;
+			}
+			else {
 
+				file << "Pipe name : ";
+				if (t.kilometr_mark == "") {
+					file << "No information found" << endl;
+				}
+				else {
+					file << t.kilometr_mark << endl;
+				}
+				file << "Pipe length: ";
+				if (t.length == 0) {
+					file << "No information found" << endl;
+				}
+				else {
+					file << t.length << endl;
+				}
+				file << "Pipe diameter: ";
+				if (t.diameter == 0) {
+					file << "No information found" << endl;
+				}
+				else {
+					file << t.diameter << endl;
+				}
 
-		file << "Pipe length: ";
-		if (t.length == 0) {
-			file << "No information found" << endl;
-		}
-		else {
-			file << t.length << endl;
-		}
+				file << "Is repair required ?  ";
 
+				if (t.Remote) {
+					file << " yes";
+				}
+				else {
+					file << " no";
+				}
 
-		file << "Pipe diameter: ";
-		if (t.diameter == 0) {
-			file << "No information found" << endl;
-		}
-		else {
-			file << t.diameter << endl;
-		}
+			}
+			file << endl << "        COMPRESSOR STATION : " << endl << endl;
+			if (cs.cs_name == "") {
+				file << "CS not add" << endl;
+			}
 
-		file << "Is repair required ?  ";
+			else {
+				file << "Name CS : ";
 
-		if (t.Remote) {
-			file << " yes";
-		}
-		else {
-			file << " no";
-		}
+				if (cs.cs_name == "") {
+					file << "No information found" << endl;
+				}
+				else {
+					file << cs.cs_name << endl;
+				}
 
-		file << endl << endl << "        COMPRESSOR STATION : " << endl << endl;
+				file << "Number of workshops : ";
+				if (cs.workshop == 0) {
+					file << "No information found" << endl;
+				}
+				else {
+					file << cs.workshop << endl;
+				}
 
-		file << "Name CS : ";
-		if (cs.cs_name == "") {
-			file << "No information found" << endl;
-		}
-		else {
-			file << cs.cs_name << endl;
-		}
+				file << "Number of operating workshops : ";
+				if (cs.operation_workshop == 0) {
+					file << "No information found" << endl;
+				}
+				else {
+					file << cs.operation_workshop << endl;
+				}
 
-		file << "Number of workshops : ";
-		if (cs.workshop == 0) {
-			file << "No information found" << endl;
-		}
-		else {
-			file << cs.workshop << endl;
-		}
+				file << "Effectiveness : ";
+				if (cs.effectiveness == 0) {
+					file << "No information found" << endl;
+				}
+				else {
+					file << cs.effectiveness << endl;
+				}
+				cout << "The information is written to a file" << endl;
+				cin.ignore();
+			}
 
-		file << "Number of operating workshops : ";
-		if (cs.operation_workshop == 0) {
-			file << "No information found" << endl;
-		}
-		else {
-			file << cs.operation_workshop << endl;
-		}
-
-		file << "Effectiveness : ";
-		if (cs.effectiveness == 0) {
-			file << "No information found" << endl;
-		}
-		else {
-			file << cs.effectiveness << endl;
 		}
 	}
-	cout << "The information is written to a file" << endl;
-	cin.ignore();
-
 }
 
 void upload(truba& t, compr_station& cs)
@@ -296,102 +317,17 @@ void upload(truba& t, compr_station& cs)
 		cerr << "File opening error" << endl;
 		return;
 	}
-	if (file.peek() == EOF) {//https://www.studyplan.dev/pro-cpp/input-streams/q/use-of-peek-method
+	if (file.peek() == EOF) {
 		cout << "There is no data in the file" << endl;
 		return;
 	}
 	string str;
 	getline(file, str);
-	if (str == "          PIPE : ") {
-		getline(file, str);
-		getline(file, str);
-		t.kilometr_mark = str.substr(12);
-		try {
-			getline(file, str);
-			t.length = stoi(str.substr(13));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "Length is not a number" << std::endl;
-		}
-
-		try {
-			getline(file, str);
-			t.diameter = stoi(str.substr(15));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "The diameter is not a number" << std::endl;
-		}
-		getline(file, str);
-		if (str == "Is repair required ?   yes") {
-			t.Remote = true;
-		}
-		else {
-			t.Remote = false;
-		}
-
-		getline(file, str);
-		getline(file, str);
-		getline(file, str);
-		getline(file, str);
-		cs.cs_name = str.substr(10);
-		try {
-			getline(file, str);
-			cs.workshop = stoi(str.substr(22));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "The number of workshops is not a number" << std::endl;
-		}
-
-		try {
-			getline(file, str);
-			cs.operation_workshop = stoi(str.substr(31));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "The number of workshops is not a number" << std::endl;
-		}
-
-		try {
-			getline(file, str);
-			cs.effectiveness = stoi(str.substr(16));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "Efficiency is not a number" << std::endl;
-		}
+	getline(file, str);
+	if (str == "PIPE not add") {
+		t.kilometr_mark = "";
 	}
 	else {
-		getline(file, str);
-		getline(file, str);
-
-		cs.cs_name = str.substr(10);
-
-		try {
-			getline(file, str);
-			cs.workshop = stoi(str.substr(22));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "The number of workshops is not a number" << std::endl;
-		}
-
-		try {
-			getline(file, str);
-			cs.operation_workshop = stoi(str.substr(31));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "The number of workshops is not a number" << std::endl;
-		}
-
-		try {
-			getline(file, str);
-			cs.effectiveness = stoi(str.substr(16));
-		}
-		catch (const invalid_argument& e) {
-			std::cerr << "Efficiency is not a number" << std::endl;
-		}
-
-		getline(file, str);
-		getline(file, str);
-		getline(file, str);
-
 		t.kilometr_mark = str.substr(12);
 		try {
 			getline(file, str);
@@ -416,11 +352,41 @@ void upload(truba& t, compr_station& cs)
 			t.Remote = false;
 		}
 	}
+	getline(file, str);
+	getline(file, str);
+	getline(file, str);
+	getline(file, str);
+
+	if (str == "CS not add") {
+		cs.cs_name = "";
+	}
+	else {
+		cs.cs_name = str.substr(10);
+		try {
+			getline(file, str);
+			cs.workshop = stoi(str.substr(22));
+		}
+		catch (const invalid_argument& e) {
+			std::cerr << "The number of workshops is not a number" << std::endl;
+		}
+
+		try {
+			getline(file, str);
+			cs.operation_workshop = stoi(str.substr(31));
+		}
+		catch (const invalid_argument& e) {
+			std::cerr << "The number of workshops is not a number" << std::endl;
+		}
+
+		try {
+			getline(file, str);
+			cs.effectiveness = stoi(str.substr(16));
+		}
+		catch (const invalid_argument& e) {
+			std::cerr << "Efficiency is not a number" << std::endl;
+		}
+	}
+
 	file.close();
 
 }
-
-
-
-
-
